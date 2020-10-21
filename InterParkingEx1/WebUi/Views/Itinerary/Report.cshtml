@@ -1,0 +1,50 @@
+﻿@{
+    ViewData["Title"] = "Report";
+}
+
+@model List<Application.Itineraries.Queries.ItineraryDto>
+
+@if (!Model.Any())
+{
+    <div class="alert alert-warning" role="alert">
+        You have not yet added any data.
+        Come back when you have added itineraries :)
+    </div>
+}
+else
+{
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">Name itinerary</th>
+                <th scope="col">Address start</th>
+                <th scope="col">Address destination</th>
+                <th scope="col">GPS start</th>
+                <th scope="col">GPS destination</th>
+                <th scope="col">Car name</th>
+                <th scope="col">Consumption / 100 km</th>
+                <th scope="col">Distance</th>
+                <th scope="col">Fuel required</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var itinerary in Model)
+            {
+                <tr>
+                    <td>@itinerary.Name</td>
+                    <td>@itinerary.StartParking.Address</td>
+                    <td>@itinerary.EndParking.Address</td>
+                    <td>@itinerary.StartParking.Longitude;@itinerary.StartParking.Latitude</td>
+                    <td>@itinerary.EndParking.Longitude;@itinerary.EndParking.Latitude</td>
+                    <td>@itinerary.CarInformation.CarName</td>
+                    <td>@itinerary.CarInformation.ConsumptionPer100Km L</td>
+                    <td>@itinerary.Distance.ToString("#0.#") km</td>
+                    <td>@itinerary.FuelNeeded.ToString("#0.#") L</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+
+

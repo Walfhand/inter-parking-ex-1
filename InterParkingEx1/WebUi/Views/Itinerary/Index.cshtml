@@ -1,0 +1,48 @@
+﻿@{
+    ViewData["Title"] = "Itinerary";
+}
+@using WebUi.Models
+@using Application.Itineraries.Commands.CreateItinerary
+@using Application.Itineraries.Commands.UpdateItinerary
+@model ItineraryViewModel
+
+
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#create-modal">Create itinary</button>
+
+<partial name="_CreateItineraryModal" model="Model" />
+
+<div class="row mt-4">
+    @foreach (var itinerary in Model.Itineraries)
+    {
+        <partial name="_UpdateItineraryModal"
+                 model="new UpdateItineraryViewModel() 
+                            { 
+                                Parkings = Model.Parkings, UpdateItineraryCommand = new UpdateItineraryCommand() 
+                                {
+                                    CarInformation = itinerary.CarInformation,
+                                    Name = itinerary.Name,
+                                    EndParkingId = itinerary.EndParking.Id,
+                                    StartParkingId = itinerary.StartParking.Id,
+                                    Id = itinerary.Id
+                                } 
+                            }" />
+
+        <div class="col-lg-4 col-md-4 col-sm-12">
+            <div class="card" style="min-height:45vh">
+                <div class="card-body">
+                    <h5>@itinerary.Name</h5>
+                    <hr />
+                    <p><i class="fas fa-car"></i> @itinerary.CarInformation.CarName</p>
+                    <p><i class="fas fa-map-marker-alt"></i> @itinerary.Distance.ToString("#0.#") km</p>
+                    <p><i class="fas fa-gas-pump"></i> @itinerary.FuelNeeded.ToString("#0.#") L</p>
+                    <p><i class="fas fa-play"></i> @itinerary.StartParking.Address</p>
+                    <p><i class="fas fa-stop"></i> @itinerary.EndParking.Address</p>
+                </div>
+                <div class="card-footer">
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#edit@(itinerary.Id)">Edit</button>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+

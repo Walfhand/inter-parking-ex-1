@@ -1,0 +1,47 @@
+﻿@using WebUi.Models
+@using Application.Parkings.Commands.CreateParking
+@using Application.Parkings.Commands.UpdateParking
+@model ParkingViewModel
+
+@{
+    ViewData["Title"] = "Parking";
+}
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#create-modal">Create parking</button>
+
+<partial name="_CreateParkingModal" model="Model.CreateParkingCommand" />
+
+<div class="row mt-4">
+    @foreach (var item in Model.Parkings)
+    {
+        <partial name="_UpdateParkingModal"
+                 model="new UpdateParkingCommand() { Address = item.Address, Name = item.Name, Id = item.Id}" />
+        <div class="col-lg-3">
+            <div class="card" style="min-height:25vh">
+                <div class="card-body">
+                    <h5>@item.Name</h5>
+                    <p>@item.Address</p>
+                </div>
+                <div class="card-footer">
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#edit@(item.Id)">Edit</button>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+@section Scripts{
+<script src="https://cdn.jsdelivr.net/npm/places.js@1.19.0"></script>
+
+<script>
+    const addressInput = document.querySelectorAll('#Address');
+    addressInput.forEach((i) => {
+        const placesAutocomplete = places({
+            appId: 'plP94VWW4T9N',
+            apiKey: 'c2d6a1e726b0f65af741c79d196063c3',
+            container: i
+        });
+    })
+    
+</script>
+}
+
