@@ -16,6 +16,32 @@ In this project you will find the context of the database as well as the geocodi
 
 Then you will find a project in asp.net core mvc classic.
 
+You will essentially find 2 controllers that will interest you.
+
+ParkingController -> which will manage the addition, retrieval and updating of parking lots.
+
+ItineraryController -> which will manage the creation, retrieval and update of itineraries.
+
+You will see 3 different tabs.
+
+1 tab Parking
+1 tab Itineraries
+1 tab report
+
+In the parking tab you will be able to :
+
+Add parking lots,
+See the list of parking lots,
+Edit a parking lot,
+
+In the Itineraries tab you will be able to:
+
+Add itineraries,
+See the list of itineraries,
+Edit itineraries
+
+In the report tab you will be able to see a summary of the data entered and calculated by the system.
+
 I use in this exercise a geolocation api.
 
 https://locationiq.com/
